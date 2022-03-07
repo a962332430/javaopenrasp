@@ -14,23 +14,23 @@ public class DeserializationFilter implements SecurityFilterI {
 
     @Override
     public boolean filter(Object forCheck) {
-        String moudleName = "java/io/ObjectInputStream";
+        String moduleName = "java/io/ObjectInputStream";
         ObjectStreamClass desc = (ObjectStreamClass) forCheck;
         String className = desc.getName();
-        String mode = (String) Config.moudleMap.get(moudleName).get("mode");
+        String mode = (String) Config.moudleMap.get(moduleName).get("mode");
         switch (mode) {
             case "block":
                 Console.log("block: " + className);
                 return false;
             case "white":
-                if (Config.isWhite(moudleName, className)) {
+                if (Config.isWhite(moduleName, className)) {
                     Console.log("pass: " + className);
                     return true;
                 }
                 Console.log("block:" + className);
                 return false;
             case "black":
-                if (Config.isBlack(moudleName, className)) {
+                if (Config.isBlack(moduleName, className)) {
                     Console.log("block: " + className);
                     return false;
                 }

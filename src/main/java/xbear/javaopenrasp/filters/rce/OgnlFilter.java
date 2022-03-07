@@ -11,7 +11,7 @@ import xbear.javaopenrasp.util.StackTrace;
 public class OgnlFilter implements SecurityFilterI {
 
     public static boolean staticFilter(Object forCheck) {
-        String moudleName = "ognl/Ognl";
+        String moduleName = "ognl/Ognl";
         String ognlExpression = (String) forCheck;
         Console.log("prepare to parse ognlExpression:" + ognlExpression);
         String mode = (String) Config.moudleMap.get("ognl/Ognl").get("mode");
@@ -20,14 +20,14 @@ public class OgnlFilter implements SecurityFilterI {
                 Console.log("block" + ognlExpression);
                 return false;
             case "white":
-                if (Config.isWhite(moudleName, ognlExpression)) {
+                if (Config.isWhite(moduleName, ognlExpression)) {
                     Console.log("parse ognlExpression:" + ognlExpression);
                     return true;
                 }
                 Console.log("block" + ognlExpression);
                 return false;
             case "black":
-                if (Config.isBlack(moudleName, ognlExpression)) {
+                if (Config.isBlack(moduleName, ognlExpression)) {
                     Console.log("block parse ognlExpression" + ognlExpression);
                     return false;
                 }
