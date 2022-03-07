@@ -15,7 +15,7 @@ import xbear.javaopenrasp.util.Console;
  * Created by xbear on 2016/11/13.
  */
 public class Config {
-	
+
 	public static Map<String, Map<String, Object>> moudleMap = new ConcurrentHashMap<String, Map<String, Object>>();
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -25,7 +25,7 @@ public class Config {
 			Console.log("init failed because of config file error");
 			return false;
 		}
-		
+
 		Map configMap = (Map) JSONUtils.parse(configStr);
 		List<Map> moudleList = (List<Map>) configMap.get("moudle");
 		for (Map m: moudleList) {
@@ -37,10 +37,10 @@ public class Config {
 			moudleMap.put((String)m.get("moudleName"), tmpMap);
 		}
 		Console.log(moudleMap.toString());
-		
+
 		return true;
 	}
-	
+
 	public static String readConfig(String filename) {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(Config.class.getResourceAsStream(filename)));
@@ -57,7 +57,7 @@ public class Config {
 		return sb.toString();
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static boolean isBlack(String moudleName, String testStr) {
 		List<String> blackList = (List<String>) moudleMap.get(moudleName).get("blackList");
@@ -68,7 +68,7 @@ public class Config {
 		}
 		return false;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static boolean isWhite(String moudleName, String testStr) {
 		List<String> whiteList = (List<String>) moudleMap.get(moudleName).get("whiteList");
@@ -82,9 +82,9 @@ public class Config {
 		}
 		return true;
 	}
-	
+
     public static void main(String[] args) {
     	initConfig();
-    	
+
     }
 }

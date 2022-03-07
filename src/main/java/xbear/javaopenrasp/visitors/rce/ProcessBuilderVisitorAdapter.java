@@ -15,14 +15,14 @@ public class ProcessBuilderVisitorAdapter extends AdviceAdapter {
 
     @Override
     protected void onMethodEnter() {
-        mv.visitTypeInsn(NEW, "xbear/javaopenrasp/filters/rce/PrcessBuilderFilter");
+        mv.visitTypeInsn(NEW, "xbear/javaopenrasp/filters/rce/ProcessBuilderFilter");
         mv.visitInsn(DUP);
-        mv.visitMethodInsn(INVOKESPECIAL, "xbear/javaopenrasp/filters/rce/PrcessBuilderFilter", "<init>", "()V", false);
+        mv.visitMethodInsn(INVOKESPECIAL, "xbear/javaopenrasp/filters/rce/ProcessBuilderFilter", "<init>", "()V", false);
         mv.visitVarInsn(ASTORE, 1);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitFieldInsn(GETFIELD, "java/lang/ProcessBuilder", "command", "Ljava/util/List;");
-        mv.visitMethodInsn(INVOKEVIRTUAL, "xbear/javaopenrasp/filters/rce/PrcessBuilderFilter", "filter", "(Ljava/lang/Object;)Z", false);
+        mv.visitMethodInsn(INVOKEVIRTUAL, "xbear/javaopenrasp/filters/rce/ProcessBuilderFilter", "filter", "(Ljava/lang/Object;)Z", false);
 
         Label l92 = new Label();
         mv.visitJumpInsn(IFNE, l92);
