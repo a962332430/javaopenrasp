@@ -16,9 +16,10 @@ import java.security.ProtectionDomain;
  */
 public class ClassTransformer implements ClassFileTransformer {
 
+    @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-        byte[] transformeredByteCode = classfileBuffer;
+        byte[] transformedByteCode = classfileBuffer;
 
         if (Config.moudleMap.containsKey(className)) {
             try {
@@ -26,7 +27,7 @@ public class ClassTransformer implements ClassFileTransformer {
                 ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
                 ClassVisitor visitor = Reflections.createVisitorIns((String) Config.moudleMap.get(className).get("loadClass"), writer, className);
                 reader.accept(visitor, ClassReader.EXPAND_FRAMES);
-                transformeredByteCode = writer.toByteArray();
+                transformedByteCode = writer.toByteArray();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (NoSuchMethodException e) {
@@ -41,6 +42,6 @@ public class ClassTransformer implements ClassFileTransformer {
                 e.printStackTrace();
             }
         }
-        return transformeredByteCode;
+        return transformedByteCode;
     }
 }
