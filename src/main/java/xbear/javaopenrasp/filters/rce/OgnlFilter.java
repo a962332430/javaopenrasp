@@ -10,7 +10,8 @@ import xbear.javaopenrasp.util.StackTrace;
  */
 public class OgnlFilter implements SecurityFilterI {
 
-    public static boolean staticFilter(Object forCheck) {
+    @Override
+    public boolean filter(Object forCheck) {
         String moduleName = "ognl/Ognl";
         String ognlExpression = (String) forCheck;
         Console.log("prepare to parse ognlExpression:" + ognlExpression);
@@ -41,9 +42,5 @@ public class OgnlFilter implements SecurityFilterI {
         }
     }
 
-    @Override
-    public boolean filter(Object forCheck) {
-        return true;
-    }
 
 }
